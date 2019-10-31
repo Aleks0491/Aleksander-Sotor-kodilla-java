@@ -2,9 +2,6 @@ package com.kodilla.testing.shape;
 
 import org.junit.*;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-
 public class ShapeCollectorTestSuite {
     private static int testCounter = 0;
 
@@ -49,16 +46,18 @@ public class ShapeCollectorTestSuite {
         Triangle triangle = new Triangle(2.5, 5.0);
         Square square1 = new Square(4.0);
         Square square2 = new Square(2.0);
-        Circle circle = new Circle(4.0);
+        Circle circle1 = new Circle(4.0);
+        Circle circle2 = new Circle(8.1);
         ShapeCollector shapeCollector = new ShapeCollector();
         shapeCollector.addFigure(triangle);
         shapeCollector.addFigure(square1);
         shapeCollector.addFigure(square2);
-        shapeCollector.addFigure(circle);
+        shapeCollector.addFigure(circle1);
+        shapeCollector.addFigure(circle2);
         //When
-        shapeCollector.removeFigure(circle);
+        shapeCollector.removeFigure(circle1);
         //Then
-        Assert.assertEquals(3, shapeCollector.getShapeList().size());
+        Assert.assertEquals(4, shapeCollector.getShapeList().size());
     }
 
     @Test
@@ -86,7 +85,12 @@ public class ShapeCollectorTestSuite {
         Square square1 = new Square(4.0);
         Square square2 = new Square(2.0);
         Circle circle = new Circle(4.0);
+
         ShapeCollector shapeCollector = new ShapeCollector();
+        shapeCollector.addFigure(triangle);
+        shapeCollector.addFigure(square1);
+        shapeCollector.addFigure(square2);
+        shapeCollector.addFigure(circle);
         //When
         shapeCollector.getShapeList();
         //Then

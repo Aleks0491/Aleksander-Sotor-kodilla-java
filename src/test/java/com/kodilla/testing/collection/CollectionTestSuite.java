@@ -36,15 +36,7 @@ public class CollectionTestSuite {
         numbers.add(2);
         numbers.add(4);
         //When
-        List<Integer> oddNumbers = new ArrayList<>()
-        for (int i = 0; i < numbers.size(); i++) {
-           ;
-            List<Integer> numbers = new ArrayList<>();
-            int include = numbers.get(i);
-            if ((include % 2) == 0) {
-                oddNumbers.add(include);
-            }
-        }
+
         //Then
         Assert.assertEquals(2, oddNumbers.size())
     }

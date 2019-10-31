@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.*;
 
+import static javax.print.attribute.standard.MediaSizeName.A;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,53 +25,126 @@ public class StatisticsCalculateTestSuit {
     }
 
     @Test
-    public void testCalculateAdvStatistics() {
+    public void testCalculateAdvStatisticsWhenPostCountIsZero() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        List<String> userNames = new ArrayList<>();
-        StatisticsCalculate statisticsCalculate = new StatisticsCalculate(statisticsMock);
+        List<String> usersNames = new ArrayList<>();
+        StatisticsCalculate statisticsCalculate = new StatisticsCalculate();
+        when(statisticsMock.usersNames()).thenReturn(usersNames);
+        when(statisticsMock.postsCount()).thenReturn(0);
+        when(statisticsMock.commentsCount()).thenReturn(1000);
         //When
-        int quantityOfPosts = statisticsCalculate.usersNames().size();
+        statisticsCalculate.calculateAdvStatistics(statisticsMock);
         //Then
-        Assert.assertEquals(0, quantityOfPosts);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerPost(),0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerUser(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverPostsPerUser(), 0.1);
 
     }
 
     @Test
-    public void testCalculateAdvStatistics2() {
+    public void testCalculateAdvStatisticsWhenPostCountIsThousand() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        List<String> usersNamesMock = new ArrayList<>();
-            for(int i = 0; i < 1000; i++) {
-                usersNamesMock.add("user" + i);
-            }
-        when(statisticsMock.usersNames()).thenReturn(usersNamesMock);
-
-        StatisticsCalculate statisticsCalculate = new StatisticsCalculate(statisticsMock);
+        List<String> usersNames = new ArrayList<>();
+        when(statisticsMock.usersNames()).thenReturn(usersNames);
+        when(statisticsMock.postsCount()).thenReturn(1000);
+        when(statisticsMock.commentsCount()).thenReturn(1000);
+        StatisticsCalculate statisticsCalculate = new StatisticsCalculate();
         //When
-        int quantityOfUsers = statisticsCalculate.usersNames().size();
+        statisticsCalculate.calculateAdvStatistics(statisticsMock);
         //Then
-        Assert.assertEquals(1000, quantityOfUsers);
+        Assert.assertEquals(1.0, statisticsCalculate.getAverCommentsPerPost(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverPostsPerUser(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerUser(), 0.1);
 
     }
     @Test
-    public void testCalculateAdvStatistics3() {
+    public void testCalculateAdvStatisticsWhenCommentCountIsZero() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        int quantityCommentsMock = 0;
-        when(statisticsMock.commentsCount()).thenReturn(quantityCommentsMock);
-        StatisticsCalculate statisticsCalculate = new StatisticsCalculate(statisticsMock);
+        List<String> usersName = new ArrayList<>();
+        StatisticsCalculate statisticsCalculate = new StatisticsCalculate();
+        when(statisticsMock.usersNames()).thenReturn(usersName);
+        when(statisticsMock.postsCount()).thenReturn(1000);
+        when(statisticsMock.commentsCount()).thenReturn(0);
         //When
-        int quantityOfComments = statisticsCalculate.commentsCount();
+       statisticsCalculate.calculateAdvStatistics(statisticsMock);
         //Then
-        Assert.assertEquals(0, quantityOfComments);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerPost(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerUser(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverPostsPerUser(), 0.1);
 
     }
 
-   /* @Test
-    public void testCalculateAdvStatistic4(Statistics statistics) {
+    @Test
+    public void testCalculateAdvStatisticWhenCommentsCountIsSmallerThanPostsCount() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-    }*/
+        List<String> usersName = new ArrayList<>();
+        StatisticsCalculate statisticsCalculate = new StatisticsCalculate();
+        when(statisticsMock.usersNames()).thenReturn(usersName);
+        when(statisticsMock.postsCount()).thenReturn(1000);
+        when(statisticsMock.commentsCount()).thenReturn(500);
+        //When
+        statisticsCalculate.calculateAdvStatistics(statisticsMock);
+        //Then
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerUser(), 0.1);
+        Assert.assertEquals(0.5, statisticsCalculate.getAverCommentsPerPost(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverPostsPerUser(), 0.1);
+    }
 
+    @Test
+    public void testCalculateAdvStatisticWhenCommentsCountIsBiggerThanPostsCount() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> usersName = new ArrayList<>();
+        StatisticsCalculate statisticsCalculate = new StatisticsCalculate();
+        when(statisticsMock.usersNames()).thenReturn(usersName);
+        when(statisticsMock.postsCount()).thenReturn(100);
+        when(statisticsMock.commentsCount()).thenReturn(500);
+        //When
+        statisticsCalculate.calculateAdvStatistics(statisticsMock);
+        //Then
+        Assert.assertEquals(0.0, statisticsCalculate.getAverPostsPerUser(), 0.1);
+        Assert.assertEquals(5.0, statisticsCalculate.getAverCommentsPerPost(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerUser(), 0.1);
+    }
+
+    @Test
+    public void testCalculateAdvStatisticWhenUsersCountIsZero() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> usersName = new ArrayList<>();
+        StatisticsCalculate statisticsCalculate = new StatisticsCalculate();
+        when(statisticsMock.usersNames()).thenReturn(usersName);
+        when(statisticsMock.commentsCount()).thenReturn(0);
+        when(statisticsMock.postsCount()).thenReturn(500);
+        //When
+        statisticsCalculate.calculateAdvStatistics(statisticsMock);
+        //Then
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerUser(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverCommentsPerPost(), 0.1);
+        Assert.assertEquals(0.0, statisticsCalculate.getAverPostsPerUser(), 0.1);
+    }
+
+    @Test
+    public void testCalculateAdvStatisticWhenUsersNameIsThousand() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> usersName = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            usersName.add("user" + i);
+        }
+        when(statisticsMock.postsCount()).thenReturn(500);
+        when(statisticsMock.commentsCount()).thenReturn(1000);
+        when(statisticsMock.usersNames()).thenReturn(usersName);
+        StatisticsCalculate statisticsCalculate = new StatisticsCalculate();
+        //When
+        statisticsCalculate.calculateAdvStatistics(statisticsMock);
+        //Then
+        Assert.assertEquals(2.0, statisticsCalculate.getAverCommentsPerPost(), 0.1);
+        Assert.assertEquals(1.0, statisticsCalculate.getAverCommentsPerUser(), 0.1);
+        Assert.assertEquals(0.5, statisticsCalculate.getAverPostsPerUser(), 0.1);
+    }
 }

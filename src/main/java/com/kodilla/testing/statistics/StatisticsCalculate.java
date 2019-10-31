@@ -2,34 +2,31 @@ package com.kodilla.testing.statistics;
 
 import java.util.List;
 
-public class StatisticsCalculate implements Statistics{
+public class StatisticsCalculate {
 
-    Statistics statistics;
-
-    private double numbersOfUsers = 0;
-    private double numbersOfPosts = 0;
-    private double numbersOfComments = 0;
-    private double averPostsPerUser = 0;
-    private double averCommentsPerUser = 0;
-    private double averCommentsPerPost = 0;
-
-    public StatisticsCalculate(Statistics statistics){
-        this.statistics = statistics;
-    }
+    private double numbersOfUsers = 0.0;
+    private double numbersOfPosts = 0.0;
+    private double numbersOfComments = 0.0;
+    private double averPostsPerUser = 0.0;
+    private double averCommentsPerUser = 0.0;
+    private double averCommentsPerPost = 0.0;
 
     public void calculateAdvStatistics(Statistics statistics) {
-        //numbersOfUsers = usersNames().size();
+        numbersOfUsers = statistics.usersNames().size();
 
-        //numbersOfPosts = ;
+        numbersOfPosts = statistics.postsCount();
 
-        //numbersOfComments = ;
+        numbersOfComments = statistics.commentsCount();
 
-        averPostsPerUser = numbersOfPosts / numbersOfUsers;
-
-        averCommentsPerPost = numbersOfComments / numbersOfPosts;
-
-        averCommentsPerUser = numbersOfComments / numbersOfUsers;
-
+        if(numbersOfUsers > 0) {
+            averPostsPerUser = numbersOfPosts / numbersOfUsers;
+        }
+        if(numbersOfPosts > 0) {
+            averCommentsPerPost = numbersOfComments / numbersOfPosts;
+        }
+        if(numbersOfUsers > 0) {
+            averCommentsPerUser = numbersOfComments / numbersOfUsers;
+        }
     }
 
     public void showStatistics() {
@@ -41,15 +38,15 @@ public class StatisticsCalculate implements Statistics{
         System.out.println("Average comments per user: " + averCommentsPerUser + ".");
     }
 
-    public List<String> usersNames() {
-        return null;
+    public double getAverPostsPerUser() {
+        return averPostsPerUser;
     }
 
-    public int postsCount() {
-        return 0;
+    public double getAverCommentsPerUser() {
+        return averCommentsPerUser;
     }
 
-    public int commentsCount() {
-        return 0;
+    public double getAverCommentsPerPost() {
+        return averCommentsPerPost;
     }
 }

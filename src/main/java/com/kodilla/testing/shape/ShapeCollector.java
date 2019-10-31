@@ -8,18 +8,21 @@ public class ShapeCollector {
     private List<Shape> shapeList = new ArrayList<>();
 
     public void addFigure(Shape shape) {
-        //return null;
+        shapeList.add(shape);
+
+        System.out.println("Size of the listShape is: " + shapeList.size());
     }
     public void removeFigure (Shape shape) {
-        //return null;
+        shapeList.remove(shape);
     }
 
     public Shape getFigure (int n) {
-        return null;
+        Shape gettingFigure = shapeList.get(n);
+        return gettingFigure;
     }
 
     public void showFigures() {
-        //return null;
+        System.out.println(shapeList);
     }
 
     public List<Shape> getShapeList() {
