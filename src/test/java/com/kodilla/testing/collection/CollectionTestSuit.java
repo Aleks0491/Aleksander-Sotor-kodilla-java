@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollectionTestSuite {
+public class CollectionTestSuit {
     @Before
     public void before() {
         System.out.println("Test Case: begin");
@@ -20,12 +20,12 @@ public class CollectionTestSuite {
     @Test
     public void testOddNumbersExterminatorEmptyList() {
         //Given
-        List<Integer> oddNumbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
+        OddNumbersExter oddNumbersExterminator = new OddNumbersExter();
         //When
-        int size = oddNumbers.size();
-        System.out.println("Size of the oddNumber list is: " + size);
+        oddNumbersExterminator.getNumbers();
         //Then
-        Assert.assertEquals(0, size);
+        Assert.assertEquals(0, oddNumbersExterminator.getOddNumbers().size());
     }
     @Test
     public void testOddNumbersExterminatorNormalList() {
@@ -35,9 +35,10 @@ public class CollectionTestSuite {
         numbers.add(1);
         numbers.add(2);
         numbers.add(4);
+        OddNumbersExter oddNumbersExterminator = new OddNumbersExter();
         //When
-
+        oddNumbersExterminator.getNumbers();
         //Then
-        Assert.assertEquals(2, oddNumbers.size())
+        Assert.assertEquals(2, oddNumbersExterminator.getOddNumbers().size());
     }
 }
