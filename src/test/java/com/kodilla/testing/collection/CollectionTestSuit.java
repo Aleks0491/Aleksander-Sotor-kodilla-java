@@ -21,24 +21,21 @@ public class CollectionTestSuit {
     public void testOddNumbersExterminatorEmptyList() {
         //Given
         List<Integer> numbers = new ArrayList<>();
+        numbers.removeAll(numbers);
         OddNumbersExter oddNumbersExterminator = new OddNumbersExter();
         //When
-        oddNumbersExterminator.getNumbers();
+        oddNumbersExterminator.exterminate(numbers);
         //Then
-        Assert.assertEquals(0, oddNumbersExterminator.getOddNumbers().size());
+        Assert.assertEquals(null, oddNumbersExterminator.oddNumbers.size());
     }
     @Test
     public void testOddNumbersExterminatorNormalList() {
         //Given
         List<Integer> numbers = new ArrayList<>();
-        numbers.add(0);
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(4);
         OddNumbersExter oddNumbersExterminator = new OddNumbersExter();
         //When
-        oddNumbersExterminator.getNumbers();
+        oddNumbersExterminator.exterminate(numbers);
         //Then
-        Assert.assertEquals(2, oddNumbersExterminator.getOddNumbers().size());
+        Assert.assertEquals(2, oddNumbersExterminator.oddNumbers.size());
     }
 }
