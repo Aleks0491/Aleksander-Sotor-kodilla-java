@@ -1,7 +1,5 @@
 package com.kodilla.exception.io;
 
-
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -15,7 +13,7 @@ public class FileReader {
     public void readFile() throws FileReaderException {
 
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(String.valueOf(classLoader.getResourceAsStream("file/names.txt")));
+        File file = new File(classLoader.getResource("names.txt").getFile());
 
             try (Stream<String> fileLines = Files.lines(Paths.get(file.getPath()))) {
 

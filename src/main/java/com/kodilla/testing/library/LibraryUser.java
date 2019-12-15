@@ -3,9 +3,9 @@ package com.kodilla.testing.library;
 import java.util.Objects;
 
 public class LibraryUser {
-    String firstName;
-    String lastName;
-    String peselID;
+    private String firstName;
+    private String lastName;
+    private String peselID;
 
     public LibraryUser(String firstName, String lastName, String peselID) {
         this.firstName = firstName;
