@@ -1,22 +1,26 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderRetriever {
 
-    private Supplier ExtraFoodShop;
-    private Supplier GlutenFreeShop;
-    private Supplier HealthyShop;
+    public OrderDTO orders() {
 
-    public List<OrderFromCustomer> retrieve() {
+        Map<Product, Integer> orderDTOmap = new HashMap<>();
+        OrderDTO orderDTO = new OrderDTO();
 
-        List<OrderFromCustomer> orderFromCustomersList = new ArrayList<>();
-        orderFromCustomersList.add(new OrderFromCustomer(ExtraFoodShop, "Milk", 3));
-        orderFromCustomersList.add(new OrderFromCustomer(ExtraFoodShop, "Bread", 2));
-        orderFromCustomersList.add(new OrderFromCustomer(GlutenFreeShop, "Pasta", 4));
-        orderFromCustomersList.add(new OrderFromCustomer(HealthyShop, "Flour", 4));
+        Product product = new Product("Flour", new BigDecimal("3.25" ), new ExtraFoodShop("ExtraFoodShop"));
+        Product product2 = new Product("Flour", new BigDecimal("3.85" ), new ExtraFoodShop("GlutenFreeShop"));
+        Product product1 = new Product("Bread", new BigDecimal("5.50"), new GlutenFreeShop("GlutenFreeShop"));
+        orderDTO.addProduct(product, 5);
+        orderDTO.addProduct(product1, 2);
+        orderDTO.addProduct(product2, 3);
 
-        return orderFromCustomersList;
+        return orderDTO;
+
     }
 }

@@ -7,7 +7,7 @@ public class Application {
         OrderRetriever orderRetriever = new OrderRetriever();
 
         OrderService orderService = new OrderService();
-        orderService.processOrder(orderRetriever.retrieve());
+        orderService.processOrder(orderRetriever.orders());
 
     }
 }

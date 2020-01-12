@@ -2,36 +2,15 @@ package com.kodilla.good.patterns.challenges.food2door;
 
 public class GlutenFreeShop extends Supplier{
 
-    private String product1;
-    private int timeToRealised;
 
-    public GlutenFreeShop(String product1, int timeToRealised) {
-        this.product1 = product1;
-        this.timeToRealised = timeToRealised;
-    }
-
-    public String getProduct1() {
-        return product1;
-    }
-
-    public int getDaysToRealised() {
-        return timeToRealised;
-    }
-
-    public void setProduct1(String product1) {
-        this.product1 = product1;
-    }
-
-    public void setDaysToRealised(int daysToRealised) {
-        this.timeToRealised = daysToRealised;
+    public GlutenFreeShop(String supplierName) {
+        super(supplierName);
     }
 
     @Override
-    boolean process(OrderToSupplier orderToSupplier) {
+    boolean process(String productName, Integer count) {
 
-        if(!orderToSupplier.getProduct().equals(getProduct1())) {
-            return false;
-        }
-        return true;
+        System.out.println("My order is " + count + " pieces of " + productName );
+        return false;
     }
 }

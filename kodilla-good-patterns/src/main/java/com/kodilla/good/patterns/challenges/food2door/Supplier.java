@@ -2,11 +2,16 @@ package com.kodilla.good.patterns.challenges.food2door;
 
 public abstract class Supplier {
 
-     private String supplier;
+     public String supplierName;
 
-     public Supplier() {
+     public Supplier(String supplierName) {
+          this.supplierName = supplierName;
      }
 
-     abstract boolean process(OrderToSupplier orderToSupplier);
+     public String getSupplierName() {
+          return supplierName;
+     }
+
+     abstract boolean process(String productName, Integer count);
 }
 

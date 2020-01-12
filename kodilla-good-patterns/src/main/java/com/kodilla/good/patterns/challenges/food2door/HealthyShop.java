@@ -5,44 +5,16 @@ import java.util.List;
 
 public class HealthyShop extends Supplier {
 
-    private String product;
-    private int timeToRealised;
 
-    public HealthyShop(String product, int timeToRealised) {
-        this.product = product;
-        this.timeToRealised = timeToRealised;
+    public HealthyShop(String supplierName) {
+        super(supplierName);
     }
 
-    public String getProduct() {
-        return product;
-    }
 
-    public int getTimeToRealised() {
-        return timeToRealised;
-    }
+    @Override
+    boolean process(String productName, Integer count) {
 
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public void setTimeToRealised(int timeToRealised) {
-        this.timeToRealised = timeToRealised;
-    }
-
-    public void createStandingOrders(String product) {
-        List<String> standingOrder = new LinkedList<>();
-        standingOrder.add(getProduct());
-    }
-
-    boolean process(OrderToSupplier orderToSupplier) {
-
-        if(!orderToSupplier.getProduct().equals(getProduct())) {
-            return false;
-        }
-
-        if(getTimeToRealised() > 1) {
-            return false;
-        }
-        return true;
+        System.out.println("Please deliver to me " + count + " of " + productName);
+        return false;
     }
 }
