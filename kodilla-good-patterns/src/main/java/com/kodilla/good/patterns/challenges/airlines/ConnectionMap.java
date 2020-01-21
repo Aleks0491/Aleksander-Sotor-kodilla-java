@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ConnectionMap {
 
-    public Map<List<Airport>, List<Airport>> connection () {
+    public Map<Airport, List<Airport>> connection () {
 
         List<Airport> departureAirportsList = new ArrayList<>();
         departureAirportsList.add(new Airport("Kraków"));
@@ -27,8 +27,28 @@ public class ConnectionMap {
         arrivalAirportsList.add(new Airport("Oslo"));
         arrivalAirportsList.add(new Airport("Moskwa"));
 
-        Map<List<Airport>, List<Airport>> connectMap = new HashMap<>();
-        connectMap.put(departureAirportsList, arrivalAirportsList);
+        List<Airport> fromKrakow = new ArrayList<>();
+        fromKrakow.add(new Airport("Wilno"));
+        fromKrakow.add(new Airport("Madryt"));
+        fromKrakow.add(new Airport("Oslo"));
+        fromKrakow.add(new Airport("Moskwa"));
+
+        List<Airport> fromGdansk = new ArrayList<>();
+        fromGdansk.add(new Airport("Wrocłąw"));
+        fromGdansk.add(new Airport("Monachium"));
+        fromGdansk.add(new Airport("Moskwa"));
+
+        List<Airport> fromOslo = new ArrayList<>();
+        fromOslo.add(new Airport("Wilno"));
+        fromOslo.add(new Airport("Madryt"));
+        fromOslo.add(new Airport("Kraków"));
+        fromOslo.add(new Airport("Moskwa"));
+
+
+        Map<Airport, List<Airport>> connectMap = new HashMap<>();
+        connectMap.put(new Airport("Kraków"), fromKrakow);
+        connectMap.put(new Airport("Gdańsk"), fromGdansk);
+        connectMap.put(new Airport("Oslo"), fromOslo);
 
         return connectMap;
     }

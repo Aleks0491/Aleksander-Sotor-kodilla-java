@@ -1,15 +1,21 @@
 package com.kodilla.good.patterns.challenges.airlines;
 
+import java.util.List;
+
 public class Application {
 
     public static void main(String[] args) {
 
         FlightService flightService = new FlightService();
-        flightService.searchFlightToList(new Airport("Kraków"));
+        List<Airport> flightTo = flightService.searchFlightToList(new Airport("Oslo"));
 
-        flightService.searchFlightFrom(new Airport("Wrocław"));
+        List<Airport> flightFrom = flightService.searchFlightFrom(new Airport("Kraków"));
 
-        flightService.searchFlightFromThroughTo(new Airport("Kraków"), new Airport("Wrocław"));
+        List<Flight> krkMd = flightService.searchFlightFromThroughTo(new Airport("Kraków"), new Airport("Madryt"));
+
+        System.out.println(flightTo);
+        System.out.println(flightFrom);
+        System.out.println(krkMd);
 
 
 

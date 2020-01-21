@@ -15,6 +15,13 @@ public class Airport {
     }
 
     @Override
+    public String toString() {
+        return "Airport{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Airport)) return false;

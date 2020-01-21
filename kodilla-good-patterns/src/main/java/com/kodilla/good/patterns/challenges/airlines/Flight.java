@@ -31,6 +31,14 @@ public class Flight {
         return transferAirport;
     }
 
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "arrivalAirport=" + arrivalAirport +
+                ", departureAirport=" + departureAirport +
+                ", transferAirport=" + transferAirport +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
