@@ -1,5 +1,7 @@
 package com.kodilla.hibernate.task.manytomany;
 
+import org.springframework.stereotype.Service;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -8,12 +10,16 @@ import java.util.List;
 @NamedNativeQuery(
         name = "Company.retrieveCompanyWithNameStartLike",
         query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE CONCAT('%',:PART_OF_COMPANY_NAME, '%')",
-       // query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE '%'" + ":PART_OF_COMPANY_NAME" + "'%'" ,
-                //"FROM COMPANIES SELECT SUBSTRING(:COMPANY_NAME, 0, 3)"
+        resultClass = Company.class
+)
+@NamedNativeQuery(
+        name = "Company.retrieveCompanyWithPartName",
+        query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE CONCAT('%',:PART_OF_COMPANY_NAME, '%')",
         resultClass = Company.class
 )
 @Entity
 @Table(name = "COMPANIES")
+@Service
 public class Company {
     private int id;
     private String name;
